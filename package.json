@@ -7,11 +7,12 @@
   "author": "Neko",
   "license": "MIT",
   "scripts": {
-    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=development",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production --node-env=production",
-    "build:dev": "export NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=development",
-    "build:prod": "export NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production --node-env=production",
-    "watch": "export NODE_OPTIONS=--openssl-legacy-provider && webpack --watch --mode=development --node-env=development",
+    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=development",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production --node-env=production",
+    "build:dev": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=development",
+    "build:prod": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production --node-env=production",
+    "build:tampermonkey": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production --node-env=production",
+    "watch": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --watch --mode=development --node-env=development",
     "serve": "webpack serve"
   },
   "engines": {

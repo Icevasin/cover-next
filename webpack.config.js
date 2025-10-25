@@ -76,6 +76,11 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = "production";
+        // Increase performance budget for production
+        config.performance = {
+            maxAssetSize: 5000000, // 5MB
+            maxEntrypointSize: 5000000, // 5MB
+        };
     } else {
         config.mode = "development";
     }

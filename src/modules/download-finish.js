@@ -7,7 +7,7 @@ import StatusBar from "../status-bar";
 
 class DownloadFinish {
     auth;
-    maxLoop = 100;
+    maxLoop = 200;
     rows;
 
     constructor( { auth } ) {

@@ -6,14 +6,11 @@ import Download from "./modules/download";
 import HookDetail from "./modules/hook-detail";
 import Setting from "./setting";
 import Cache from "./cache";
-import ServerCache from "./modules/server-cache";
 import Thank from "./modules/thank";
 import Clean from "./modules/clean";
 import Album from "./modules/album";
 import Detail from "./modules/detail";
 import Boot from "./modules/boot";
-import Serial from "./modules/serial";
-import Letter from "./modules/letter";
 import './template';
 //import './skin';
 import Auth from "./modules/auth";
@@ -26,9 +23,6 @@ import Warning from "./warning";
     //setting
     Setting.load();
 
-    // Serial
-    new Serial;
-
     //Boot
     const boot = new Boot();
 
@@ -38,14 +32,8 @@ import Warning from "./warning";
     //Auth
     const auth = new Auth();
 
-    //Server Cache
-    const serverCache = new ServerCache();
-
     //warning
     Warning.make(Cache);
-
-    //Letter
-    new Letter;
 
     //working
     if([
@@ -56,28 +44,13 @@ import Warning from "./warning";
         '/viewno18sb.php',
         '/viewbrsb.php',
     ].includes(window.location.pathname)) {
-        //check server cache when user is not premium
-        let status = false;
-
-        //loop 5 times
-        if(Setting.serverCache ===  true){
-            for(let i = 0; i < 5; i++) {
-                try{
-                    status = await serverCache.check();
-                }catch(e) {
-                    console.error(e);
-                }
-                if(status === true) break;
-            }
-
-            if(status !== true) {
-                StatusBar.bottom('เชื่อมต่อกับ Server Cache ล้มเหลว! <a href="https://github.com/kon3ko/cover-next/issues" target="_blank">แจ้งปัญหาที่นี่</a>');
-            }
-        }
-
         //head
         let tr = $('table.mainouter>tbody>tr>td[align="center"]>table[width="100%"]>tbody>tr');
+        Log('Found rows:', tr.length);
         let head = new Head({ element: tr.get(0), itemLength: tr.length, auth: auth });
+        Log('Head done');
+        Log('Processing rows...');
+        Log('Total rows:', tr.length - 1);
         let rows = [];
 
         //remove head row
@@ -135,9 +108,6 @@ import Warning from "./warning";
         });
 
         //covers
-        if(Setting.serverCache === true && ServerCache.status === true && auth.isPremium === false) {
-            await serverCache.get(covers.map(cover => cover.data.detailId));
-        }
         covers.forEach((cover) => {
             cover.nextTick();
         });

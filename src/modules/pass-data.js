@@ -75,12 +75,19 @@ class PassData {
 
         //detail link and id
         this.detailLink = $('a', this.td.get(1)).first()?.attr('href');
+        console.log(this.detailLink);
+        console.log(/[?&]id=([0-9]+)/.exec(this.detailLink));
+        console.log(/[?&]id=([0-9]+)/.exec(this.detailLink)?.[1]);
+        
+        Log(this.hash, `detail Link raw: ${this.detailLink}`);
+        Log(this.hash, `detail Link regex match: ${/id=([0-9]+)/.exec(this.detailLink)}`);
+        Log(this.hash, `detail Link regex match index 1: ${/id=([0-9]+)/.exec(this.detailLink)?.[1]}`);
         this.detailId   = /id=([0-9]+)/.exec(this.detailLink)[ 1 ];
 
         //download
         this.elements.download = $('td[width="900"] a>img[src="pic/downloaded.gif"]', this.element).parent();
         this.download = this.elements.download?.attr('href');
-
+        
         //category
         this.category = $('img', this.td.get(0)).first()?.attr('src').replace('pic/categories/cat-', '')
             .replace('pic/categories/', '')

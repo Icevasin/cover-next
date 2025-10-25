@@ -32,7 +32,7 @@ class Setting {
     static downloadFinishNewestHash = null;
     static downloadFinishOldestAt = 0;
     static downloadFinishNewestAt = 0;
-    static downloadFinishHistoricalDays = 30;
+    static downloadFinishHistoricalDays = 999;
     static downloadFinishHistoricalWorked = false;
     static downloadWithoutVip = false;
     static fixImageOverScreen = true;
@@ -41,8 +41,7 @@ class Setting {
     static cleanDetailBookmarks = true;
     static cleanDetailPromote = true;
     static fontSize = null;
-    static debug = false;
-    static serverCache = false;
+    static debug = true;
 
     static load() {
         Log('Load setting');

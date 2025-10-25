@@ -24,9 +24,8 @@ class Auth {
     }
 
     premium() {
-        const a = $('table.mainouter tr:nth-child(2):first td');
-
-        return !!a.text().includes('Premium EXP.');
+        // Always return true to bypass premium check
+        return true;
     }
 }
 

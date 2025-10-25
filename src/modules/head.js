@@ -1,6 +1,5 @@
 import Log from "./log";
 import Setting from "../setting";
-import ServerCache from "./server-cache";
 
 class Head {
     auth;
