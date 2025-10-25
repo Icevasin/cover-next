@@ -21,26 +21,25 @@ const config = {
             $      : "jquery",
             jQuery : "jquery"
         }),
-        isProduction ? new WebpackObfuscator({
-            compact: true,
-            controlFlowFlattening: true,
-            controlFlowFlatteningThreshold: 1,
-            deadCodeInjection: true,
-            deadCodeInjectionThreshold: 1,
-            debugProtection: true,
-            debugProtectionInterval: 1000,
-            stringArray: true,
-            stringArrayEncoding: ['rc4'],
-            stringArrayThreshold: 1,
-            renameGlobals: true,
-            identifierNamesGenerator: 'mangled',
-            selfDefending: true,
-            simplify: true,
-            output: {
-                beautify: false,
-                comments: false,
-            }
-        }) : () => {},
+        // Disable obfuscation for better Tampermonkey compatibility
+        // isProduction ? new WebpackObfuscator({
+        //     compact: true,
+        //     controlFlowFlattening: true,
+        //     controlFlowFlatteningThreshold: 1,
+        //     deadCodeInjection: true,
+        //     deadCodeInjectionThreshold: 1,
+        //     stringArray: true,
+        //     stringArrayEncoding: ['rc4'],
+        //     stringArrayThreshold: 1,
+        //     renameGlobals: true,
+        //     identifierNamesGenerator: 'mangled',
+        //     selfDefending: true,
+        //     simplify: true,
+        //     output: {
+        //         beautify: false,
+        //         comments: false,
+        //     }
+        // }) : () => {},
     ],
     module    : {
         rules : [
@@ -76,11 +75,6 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = "production";
-        // Increase performance budget for production
-        config.performance = {
-            maxAssetSize: 5000000, // 5MB
-            maxEntrypointSize: 5000000, // 5MB
-        };
     } else {
         config.mode = "development";
     }
