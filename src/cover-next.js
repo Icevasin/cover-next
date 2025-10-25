@@ -1,3 +1,4 @@
+import Log from "./modules/log";
 import Head from "./modules/head";
 import PassData from "./modules/pass-data";
 import Cover from "./modules/cover";

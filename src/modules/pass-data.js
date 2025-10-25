@@ -39,7 +39,8 @@ class PassData {
 
     convert() {
         this.td = $('td', this.element);
-
+        console.log('td', this.td);
+        
         //title
         let _title          = $('a:first-child b', this.td.get(1)).first();
         this.title          = _title.text();
@@ -75,25 +76,28 @@ class PassData {
 
         //detail link and id
         this.detailLink = $('a', this.td.get(1)).first()?.attr('href');
-        console.log(this.detailLink);
-        console.log(/[?&]id=([0-9]+)/.exec(this.detailLink));
-        console.log(/[?&]id=([0-9]+)/.exec(this.detailLink)?.[1]);
-        
         Log(this.hash, `detail Link raw: ${this.detailLink}`);
         Log(this.hash, `detail Link regex match: ${/id=([0-9]+)/.exec(this.detailLink)}`);
         Log(this.hash, `detail Link regex match index 1: ${/id=([0-9]+)/.exec(this.detailLink)?.[1]}`);
-        this.detailId   = /id=([0-9]+)/.exec(this.detailLink)[ 1 ];
+        this.detailId   = /[?&]id=([0-9]+)/.exec(this.detailLink)?.[1];
 
         //download
         this.elements.download = $('td[width="900"] a>img[src="pic/downloaded.gif"]', this.element).parent();
+        console.log('this.elements.download', this.elements.download);
+        console.log('this.elements.download href', this.elements.download?.attr('href'));        
         this.download = this.elements.download?.attr('href');
         
         //category
-        this.category = $('img', this.td.get(0)).first()?.attr('src').replace('pic/categories/cat-', '')
-            .replace('pic/categories/', '')
-            .replace('.gif', '')
-            .replace('.png', '')
-            .toLowerCase();
+        console.log('td get 0', this.td.get(0));
+        console.log('img in td get 0', $('img', this.td.get(0)).first());
+        console.log('src of img in td get 0', $('img', this.td.get(0)).first()?.attr('src'));
+        
+        // this.category = $('img', this.td.get(0)).first()?.attr('src').replace('pic/categories/cat-', '')
+        //     .replace('pic/categories/', '')
+        //     .replace('.gif', '')
+        //     .replace('.png', '')
+        //     .toLowerCase();
+        this.category = '';
 
         //from index
         this.size       = this.td.get(this.head.size)?.textContent;
